@@ -92,7 +92,7 @@ function ProtectedApp() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Task-Management-App">
       <Routes>
         <Route
           path="/login"
