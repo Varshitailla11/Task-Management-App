@@ -38,7 +38,7 @@ jobs:
       - name: Build frontend
   working-directory: frontend
   env:
-    VITE_API_URL: https://YOUR-RENDER-URL/api/tasks
+    VITE_API_URL: https://taskflow-backend-3b0o.onrender.com/
       run: npm run build 
 
       - name: Upload production build
