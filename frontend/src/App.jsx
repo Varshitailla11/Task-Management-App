@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-
+import Settings from "./pages/Settings";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 
@@ -38,6 +38,7 @@ function AppLayout() {
         <Navbar onMenuClick={() => setOpenPath(pathname)} />
 
         <Routes>
+          <Route path="/settings" element={<Settings />} />
           <Route path="/" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/tasks" element={<Tasks />} />
