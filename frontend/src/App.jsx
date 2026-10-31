@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useState } from "react";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
@@ -18,14 +19,24 @@ import Register from "./pages/Register";
 import { useAuth } from "./context/AuthContext";
 
 import "./App.css";
+import "./design-system.css";
 
 function AppLayout() {
+  // The mobile drawer is "open" only for the path it was opened on,
+  // so any route change closes it automatically.
+  const { pathname } = useLocation();
+  const [openPath, setOpenPath] = useState(null);
+  const navOpen = openPath === pathname;
+
   return (
     <div className="app">
-      <Sidebar />
+      <Sidebar
+        open={navOpen}
+        onClose={() => setOpenPath(null)}
+      />
 
       <main className="main">
-        <Navbar />
+        <Navbar onMenuClick={() => setOpenPath(pathname)} />
 
         <Routes>
           <Route
