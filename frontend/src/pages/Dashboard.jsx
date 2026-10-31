@@ -344,7 +344,7 @@ function Dashboard() {
               >
                 {overdueTasks > 0
                   ? "Attention"
-                  : "Good"}
+                  : "On track"}
               </span>
             </div>
 
@@ -353,9 +353,7 @@ function Dashboard() {
             </p>
 
             <div className="stat-value">
-              {String(
-                overdueTasks
-              ).padStart(2, "0")}
+              {overdueTasks}
               <span>
                 needs attention
               </span>
@@ -387,7 +385,10 @@ function Dashboard() {
 
             <div className="productivity-content">
 
-              <div className="productivity-score">
+              <div
+                className="productivity-score"
+                style={{ "--score": productivity }}
+              >
                 <div>
                   <strong>
                     {productivity}%
