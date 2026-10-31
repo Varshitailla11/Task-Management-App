@@ -3,6 +3,7 @@ import {
   Bell,
   ChevronDown,
   LogOut,
+  Menu,
 } from "lucide-react";
 
 import {
@@ -10,11 +11,11 @@ import {
   useNavigate,
 } from "react-router-dom";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { useAuth } from "../context/AuthContext";
 
-function Navbar() {
+function Navbar({ onMenuClick = () => {} }) {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -22,6 +23,34 @@ function Navbar() {
 
   const [profileOpen, setProfileOpen] =
     useState(false);
+
+  const searchRef = useRef(null);
+  const profileRef = useRef(null);
+
+  // Ctrl/Cmd + K focuses search (matches the hint in the UI)
+  useEffect(() => {
+    const onKey = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        searchRef.current?.focus();
+      }
+      if (e.key === "Escape") setProfileOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, []);
+
+  // click outside closes the profile menu
+  useEffect(() => {
+    if (!profileOpen) return undefined;
+    const onDown = (e) => {
+      if (profileRef.current && !profileRef.current.contains(e.target)) {
+        setProfileOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, [profileOpen]);
 
   const pageNames = {
     "/": "Dashboard",
@@ -60,6 +89,15 @@ function Navbar() {
     <header className="navbar">
 
       {/* LEFT */}
+      <button
+        type="button"
+        className="menu-button"
+        onClick={onMenuClick}
+        aria-label="Open navigation"
+      >
+        <Menu size={20} strokeWidth={1.8} />
+      </button>
+
       <div className="breadcrumb">
 
         <span>
@@ -89,8 +127,10 @@ function Navbar() {
           />
 
           <input
+            ref={searchRef}
             type="text"
             placeholder="Search tasks..."
+            aria-label="Search tasks"
           />
 
           <span className="search-shortcut">
@@ -122,7 +162,7 @@ function Navbar() {
 
 
         {/* PROFILE */}
-        <div className="profile-wrapper">
+        <div className="profile-wrapper" ref={profileRef}>
 
           <button
             type="button"
