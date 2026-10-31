@@ -9,11 +9,14 @@ import {
   Users,
   Settings,
   Sparkles,
+  X,
 } from "lucide-react";
+
+import { useEffect } from "react";
 
 import { useLocation, useNavigate } from "react-router-dom";
 
-function Sidebar() {
+function Sidebar({ open = false, onClose = () => {} }) {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -63,8 +66,27 @@ function Sidebar() {
     return location.pathname.startsWith(path);
   };
 
+  // Escape closes the mobile drawer
+  useEffect(() => {
+    if (!open) return undefined;
+    const onKey = (e) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open, onClose]);
+
   return (
-    <aside className="sidebar">
+    <>
+    <div
+      className={`sidebar-overlay ${open ? "visible" : ""}`}
+      onClick={onClose}
+      aria-hidden="true"
+    />
+    <aside
+      className={`sidebar ${open ? "open" : ""}`}
+      aria-label="Primary"
+    >
 
       {/* BRAND */}
       <div className="sidebar-brand">
@@ -76,6 +98,15 @@ function Sidebar() {
           <h2>TaskFlow</h2>
           <span>Workspace</span>
         </div>
+
+        <button
+          type="button"
+          className="sidebar-close"
+          onClick={onClose}
+          aria-label="Close navigation"
+        >
+          <X size={18} strokeWidth={1.8} />
+        </button>
       </div>
 
       {/* NAVIGATION */}
@@ -97,6 +128,7 @@ function Sidebar() {
                   isActive(item.path) ? "active" : ""
                 }`}
                 onClick={() => navigate(item.path)}
+                aria-current={isActive(item.path) ? "page" : undefined}
               >
                 <Icon
                   size={19}
@@ -154,6 +186,7 @@ function Sidebar() {
 
       </div>
     </aside>
+    </>
   );
 }
 
