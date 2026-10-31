@@ -1,5 +1,6 @@
+
 import { useState } from "react";
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
@@ -22,8 +23,6 @@ import "./App.css";
 import "./design-system.css";
 
 function AppLayout() {
-  // The mobile drawer is "open" only for the path it was opened on,
-  // so any route change closes it automatically.
   const { pathname } = useLocation();
   const [openPath, setOpenPath] = useState(null);
   const navOpen = openPath === pathname;
@@ -39,45 +38,16 @@ function AppLayout() {
         <Navbar onMenuClick={() => setOpenPath(pathname)} />
 
         <Routes>
-          <Route
-            path="/"
-            element={<Dashboard />}
-          />
-
-          <Route
-            path="/tasks"
-            element={<Tasks />}
-          />
-
-          <Route
-            path="/projects"
-            element={<Projects />}
-          />
-
-           <Route
-            path="/projects/:projectId"
-            element={<ProjectDetails />}
-           />
-
-          <Route
-            path="/kanban"
-            element={<Kanban />}
-          />
-
-          <Route
-            path="/calendar"
-            element={<Calendar />}
-          />
-
-          <Route
-            path="/analytics"
-            element={<Analytics />}
-          />
-
-          <Route
-            path="/team"
-            element={<Team />}
-          />
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/tasks" element={<Tasks />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/:projectId" element={<ProjectDetails />} />
+          <Route path="/kanban" element={<Kanban />} />
+          <Route path="/calendar" element={<Calendar />} />
+          <Route path="/analytics" element={<Analytics />} />
+          <Route path="/team" element={<Team />} />
+          <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </main>
     </div>
@@ -85,17 +55,10 @@ function AppLayout() {
 }
 
 function ProtectedApp() {
-  const {
-    isAuthenticated,
-  } = useAuth();
+  const { isAuthenticated } = useAuth();
 
   if (!isAuthenticated) {
-    return (
-      <Navigate
-        to="/login"
-        replace
-      />
-    );
+    return <Navigate to="/login" replace />;
   }
 
   return <AppLayout />;
@@ -103,24 +66,11 @@ function ProtectedApp() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/login"
-          element={<Login />}
-        />
-
-        <Route
-          path="/register"
-          element={<Register />}
-        />
-
-        <Route
-          path="/*"
-          element={<ProtectedApp />}
-        />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/*" element={<ProtectedApp />} />
+    </Routes>
   );
 }
 
