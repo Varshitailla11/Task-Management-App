@@ -41,6 +41,11 @@ jobs:
           VITE_API_URL: https://taskflow-backend-3b0o.onrender.com/api/tasks
         run: npm run build
 
+      - name: Add SPA fallback for client-side routes
+        # GitHub Pages has no server-side rewrites. Serving index.html as
+        # 404.html lets /login, /register, /dashboard... load on refresh.
+        run: cp frontend/dist/index.html frontend/dist/404.html
+
       - name: Upload production build
         uses: actions/upload-pages-artifact@v3
         with:
