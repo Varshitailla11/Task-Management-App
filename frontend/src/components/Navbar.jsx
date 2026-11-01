@@ -8,7 +8,6 @@ import {
 
 import {
   useLocation,
-  useNavigate,
 } from "react-router-dom";
 
 import { useEffect, useRef, useState } from "react";
@@ -17,7 +16,6 @@ import { useAuth } from "../context/AuthContext";
 
 function Navbar({ onMenuClick = () => {} }) {
   const location = useLocation();
-  const navigate = useNavigate();
 
   const { user, logout } = useAuth();
 
@@ -53,7 +51,7 @@ function Navbar({ onMenuClick = () => {} }) {
   }, [profileOpen]);
 
   const pageNames = {
-    "/": "Dashboard",
+    "/dashboard": "Dashboard",
     "/tasks": "My Tasks",
     "/projects": "Projects",
     "/kanban": "Kanban Board",
@@ -78,11 +76,11 @@ function Navbar({ onMenuClick = () => {} }) {
       .toUpperCase();
 
   const handleLogout = () => {
-    logout();
-
-    navigate("/login");
-
     setProfileOpen(false);
+
+    // Clears the session. ProtectedApp then redirects a user who signed
+    // out on purpose to the public landing page ("/").
+    logout();
   };
 
   return (
