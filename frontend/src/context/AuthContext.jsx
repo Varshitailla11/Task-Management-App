@@ -19,6 +19,10 @@ import {
   );
   
   export function AuthProvider({ children }) {
+    // true only after an explicit logout; lets the protected area send the
+    // user to the landing page (instead of /login) when they sign out
+    const [loggedOut, setLoggedOut] = useState(false);
+
     const [user, setUser] = useState(
       getCurrentUser()
     );
@@ -67,6 +71,7 @@ import {
         );
   
         setUser(data.user);
+        setLoggedOut(false);
   
         return data;
       } finally {
@@ -113,6 +118,7 @@ import {
         );
   
         setUser(data.user);
+        setLoggedOut(false);
   
         return data;
       } finally {
@@ -123,12 +129,14 @@ import {
     const logout = () => {
       logoutUser();
       setUser(null);
+      setLoggedOut(true);
     };
   
     const value = {
       user,
       loading,
       isAuthenticated,
+      loggedOut,
       login,
       register,
       logout,
