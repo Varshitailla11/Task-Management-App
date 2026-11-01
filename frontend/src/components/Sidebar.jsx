@@ -24,7 +24,7 @@ function Sidebar({ open = false, onClose = () => {} }) {
     {
       label: "Dashboard",
       icon: LayoutDashboard,
-      path: "/",
+      path: "/dashboard",
     },
     {
       label: "My Tasks",
@@ -59,10 +59,6 @@ function Sidebar({ open = false, onClose = () => {} }) {
   ];
 
   const isActive = (path) => {
-    if (path === "/") {
-      return location.pathname === "/";
-    }
-
     return location.pathname.startsWith(path);
   };
 
@@ -146,18 +142,17 @@ function Sidebar({ open = false, onClose = () => {} }) {
       <div className="sidebar-bottom">
 
         <button
-  type="button"
-  className={`sidebar-item settings-item ${
-    location.pathname === "/settings" ? "active" : ""
-  }`}
-  onClick={() => navigate("/settings")}
-  aria-current={
-    location.pathname === "/settings" ? "page" : undefined
-  }
->
-  <Settings size={19} strokeWidth={1.8} />
-  <span>Settings</span>
-</button>
+          type="button"
+          className="sidebar-item settings-item"
+          onClick={() => alert("Settings coming soon!")}
+        >
+          <Settings
+            size={19}
+            strokeWidth={1.8}
+          />
+
+          <span>Settings</span>
+        </button>
 
         {/* UPGRADE CARD */}
         <div className="upgrade-card">
