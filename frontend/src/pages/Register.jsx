@@ -45,7 +45,7 @@ function Register() {
         password
       );
 
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       setError(
         error.message ||
@@ -57,6 +57,10 @@ function Register() {
   return (
     <div className="auth-page">
       <div className="auth-card">
+        <Link to="/" className="auth-back">
+          &larr; Back to home
+        </Link>
+
         <div className="auth-header">
           <h1>Create your account</h1>
 
