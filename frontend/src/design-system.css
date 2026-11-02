@@ -50,22 +50,22 @@ h1, h2, h3, h4 {
 .brand-logo {
   width: 32px;
   height: 32px;
-  border-radius: var(--radius-md);
-  background: var(--primary);
+  border-radius: 10px;
+  background: linear-gradient(160deg, var(--accent), var(--primary-dark));
   color: #ffffff;
-  font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 700;
-  box-shadow: 0 1px 2px rgba(79, 70, 229, 0.35);
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(15, 42, 32, 0.25);
 }
 
 .brand-info h2 {
-  color: var(--text-main);
-  font-family: var(--font-body);
-  font-size: 15px;
-  line-height: 20px;
-  font-weight: 650;
-  letter-spacing: -0.01em;
+  color: var(--primary-dark);
+  font-family: var(--font-display);
+  font-size: 19px;
+  line-height: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .brand-info span {
@@ -121,7 +121,7 @@ h1, h2, h3, h4 {
 }
 
 .sidebar-item.active svg {
-  color: var(--primary);
+  color: var(--accent);
 }
 
 .sidebar-item.active::before {
@@ -152,7 +152,7 @@ h1, h2, h3, h4 {
   grid-row: 1 / span 2;
   margin: 0;
   background: var(--primary-light);
-  color: var(--primary);
+  color: var(--accent);
   border-radius: var(--radius-md);
 }
 
@@ -332,10 +332,14 @@ h1, h2, h3, h4 {
 
 .profile-avatar,
 .profile-dropdown-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--primary);
+  background: linear-gradient(160deg, var(--accent), var(--primary-dark));
   color: #ffffff;
   font-size: 13px;
   font-weight: 600;
@@ -459,22 +463,51 @@ h1, h2, h3, h4 {
   margin-bottom: 24px;
 }
 
-.eyebrow {
-  margin: 0 0 4px;
-  color: var(--text-muted);
-  font-size: 13px;
-  font-weight: 500;
+p.eyebrow,
+.welcome-section p.eyebrow,
+.page-header p.eyebrow,
+.page-heading p.eyebrow,
+.tasks-header p.eyebrow {
+  margin: 0 0 6px;
+  color: var(--accent);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .welcome-section h1,
 .page-header h1,
 .page-heading h1,
 .tasks-header h1 {
+  color: var(--primary-dark);
+  font-family: var(--font-display);
+  font-size: 32px;
+  line-height: 38px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+/* data & UI text stays in the body face for legibility */
+.stat-value,
+.productivity-score strong,
+.project-icon,
+.project-stat strong,
+.analytics-card strong,
+.member-avatar,
+.member-stats strong,
+.section-heading h2,
+.modal-header h2,
+.task-details-title {
   font-family: var(--font-body);
-  font-size: 28px;
-  line-height: 34px;
-  font-weight: 650;
-  letter-spacing: -0.025em;
+}
+
+.calendar-header h2 {
+  font-family: var(--font-display);
+  color: var(--primary-dark);
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .welcome-text,
@@ -501,12 +534,12 @@ h1, h2, h3, h4 {
   height: 36px;
   padding: 0 14px;
   border: 1px solid var(--primary-dark);
-  border-radius: var(--radius-md);
+  border-radius: 10px;
   background: var(--primary);
   color: #ffffff;
   font-size: 14px;
   font-weight: 600;
-  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  box-shadow: 0 1px 2px rgba(15, 42, 32, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   transition: background 0.15s var(--ease), box-shadow 0.15s var(--ease), transform 0.1s var(--ease);
 }
 
@@ -516,7 +549,7 @@ h1, h2, h3, h4 {
 .add-task-button.primary:hover {
   background: var(--primary-dark);
   transform: none;
-  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  box-shadow: 0 1px 2px rgba(15, 42, 32, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 .create-button:active,
@@ -670,12 +703,12 @@ h1, h2, h3, h4 {
   height: 32px;
   border-radius: var(--radius-md);
   background: var(--primary-light);
-  color: var(--primary);
+  color: var(--accent);
 }
 
 .stat-card:nth-child(2) .stat-icon {
-  background: var(--info-bg);
-  color: var(--info);
+  background: var(--primary-light);
+  color: var(--primary);
 }
 
 .stat-card:nth-child(3) .stat-icon {
@@ -734,7 +767,7 @@ h1, h2, h3, h4 {
   width: 120px;
   height: 120px;
   background: conic-gradient(
-    var(--primary) calc(var(--score, 0) * 3.6deg),
+    var(--accent) calc(var(--score, 0) * 3.6deg),
     var(--surface-muted) 0
   );
 }
@@ -799,7 +832,7 @@ h1, h2, h3, h4 {
 .form-group input:hover,
 .form-group textarea:hover,
 .form-group select:hover {
-  border-color: #a1a1aa;
+  border-color: #9db5a1;
 }
 
 .form-input:focus,
@@ -815,7 +848,7 @@ h1, h2, h3, h4 {
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-  color: #a1a1aa;
+  color: #8a9a90;
 }
 
 .form-group input:disabled,
@@ -834,7 +867,7 @@ h1, h2, h3, h4 {
 /* ---------- Modals ---------- */
 
 .modal-overlay {
-  background: rgba(24, 24, 27, 0.45);
+  background: rgba(15, 42, 32, 0.45);
   -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
   animation: ds-fade 0.16s var(--ease);
@@ -902,7 +935,7 @@ h1, h2, h3, h4 {
 .ds-skeleton {
   display: block;
   border-radius: var(--radius-md);
-  background: linear-gradient(90deg, var(--surface-muted) 25%, #ececef 37%, var(--surface-muted) 63%);
+  background: linear-gradient(90deg, var(--surface-muted) 25%, #e3eae2 37%, var(--surface-muted) 63%);
   background-size: 400% 100%;
   animation: ds-shimmer 1.4s ease infinite;
 }
@@ -943,7 +976,7 @@ h1, h2, h3, h4 {
 
 .auth-page {
   background: var(--background);
-  background-image: radial-gradient(circle at 50% 0%, rgba(79, 70, 229, 0.07), transparent 55%);
+  background-image: radial-gradient(60% 50% at 85% 0%, rgba(143, 176, 154, 0.28), transparent 70%), radial-gradient(45% 45% at 0% 0%, rgba(211, 226, 213, 0.6), transparent 70%);
 }
 
 .auth-page::before,
@@ -1011,11 +1044,12 @@ h1, h2, h3, h4 {
 }
 
 .auth-header h1 {
-  font-family: var(--font-body);
-  font-size: 24px;
-  line-height: 30px;
-  font-weight: 650;
-  letter-spacing: -0.025em;
+  color: var(--primary-dark);
+  font-family: var(--font-display);
+  font-size: 30px;
+  line-height: 36px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
 }
 
 .auth-header p {
@@ -1116,7 +1150,7 @@ h1, h2, h3, h4 {
     display: block;
     position: fixed;
     inset: 0;
-    background: rgba(24, 24, 27, 0.45);
+    background: rgba(15, 42, 32, 0.45);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.24s var(--ease);
