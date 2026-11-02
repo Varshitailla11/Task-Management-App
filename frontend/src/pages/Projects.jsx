@@ -814,7 +814,7 @@ function Projects() {
                         margin:
                           "8px 0",
                         color:
-                          "#64748b",
+                          "var(--text-muted)",
                       }}
                     >
                       Loading team
@@ -827,7 +827,7 @@ function Projects() {
                         margin:
                           "8px 0",
                         color:
-                          "#64748b",
+                          "var(--text-muted)",
                       }}
                     >
                       No active team
@@ -931,7 +931,7 @@ function Projects() {
                                     padding:
                                       "10px 12px",
                                     border:
-                                      "1px solid #e2e8f0",
+                                      "1px solid var(--border)",
                                     borderRadius:
                                       "10px",
                                   }}
@@ -949,7 +949,7 @@ function Projects() {
                                         fontSize:
                                           "12px",
                                         color:
-                                          "#64748b",
+                                          "var(--text-muted)",
                                       }}
                                     >
                                       {
@@ -1024,7 +1024,7 @@ function Projects() {
                                         background:
                                           "transparent",
                                         color:
-                                          "#dc2626",
+                                          "var(--danger)",
                                         cursor:
                                           "pointer",
                                         fontWeight:
