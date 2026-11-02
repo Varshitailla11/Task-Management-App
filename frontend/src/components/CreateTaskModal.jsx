@@ -187,7 +187,7 @@ function CreateTaskModal({ onClose, onCreate }) {
                     left: "12px",
                     top: "50%",
                     transform: "translateY(-50%)",
-                    color: "#9aa2b0",
+                    color: "var(--text-muted)",
                     pointerEvents: "none",
                   }}
                 />
