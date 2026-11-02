@@ -866,7 +866,7 @@ function Tasks() {
                     <small
                       style={{
                         color:
-                          "#dc2626",
+                          "var(--danger)",
                         marginTop:
                           "6px",
                         display:
